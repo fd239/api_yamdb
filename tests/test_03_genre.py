@@ -114,4 +114,3 @@ class Test03GenreAPI:
         user, moderator = create_users_api(user_client)
         self.check_permissions(user, 'обычного пользователя', genres)
         self.check_permissions(moderator, 'модератора', genres)
-

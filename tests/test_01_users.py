@@ -62,8 +62,9 @@ class Test01UserAPI:
         assert type(data['results']) == list, \
             'Проверьте, что при GET запросе `/api/v1/users/` возвращаете данные с пагинацией. ' \
             'Тип параметра `results` должен быть список'
-        assert len(data['results']) == 1 and data['results'][0].get('username') == admin.username \
-            and data['results'][0].get('email') == admin.email, \
+        assert len(data['results']) == 1 and data['results'][0].get(
+            'username') == admin.username \
+               and data['results'][0].get('email') == admin.email, \
             'Проверьте, что при GET запросе `/api/v1/users/` возвращаете данные с пагинацией. ' \
             'Значение параметра `results` не правильное'
 
@@ -177,7 +178,8 @@ class Test01UserAPI:
             'last_name': 'Test',
             'bio': 'description'
         }
-        response = user_client.patch(f'/api/v1/users/{admin.username}/', data=data)
+        response = user_client.patch(f'/api/v1/users/{admin.username}/',
+                                     data=data)
         assert response.status_code == 200, \
             'Проверьте, что при PATCH запросе `/api/v1/users/{username}/` с токеном авторизации возвращается статус 200'
         test_admin = get_user_model().objects.get(username=admin.username)
@@ -185,7 +187,8 @@ class Test01UserAPI:
             'Проверьте, что при PATCH запросе `/api/v1/users/{username}/` изменяете данные.'
         assert test_admin.last_name == data['last_name'], \
             'Проверьте, что при PATCH запросе `/api/v1/users/{username}/` изменяете данные.'
-        response = user_client.patch(f'/api/v1/users/{user.username}/', data={'role': 'admin'})
+        response = user_client.patch(f'/api/v1/users/{user.username}/',
+                                     data={'role': 'admin'})
         assert response.status_code == 200, \
             'Проверьте, что при PATCH запросе `/api/v1/users/{username}/` с токеном авторизации возвращается статус 200'
         client_user = auth_client(user)
@@ -227,7 +230,8 @@ class Test01UserAPI:
             'last_name': 'Test',
             'bio': 'description'
         }
-        response = client_user.patch(f'/api/v1/users/{admin.username}/', data=data)
+        response = client_user.patch(f'/api/v1/users/{admin.username}/',
+                                     data=data)
         assert response.status_code == 403, \
             f'Проверьте, что при PATCH запросе `/api/v1/users/{{username}}/` ' \
             f'с токеном авторизации {user_name} возвращается статус 403'
@@ -281,8 +285,10 @@ class Test01UserAPI:
         assert response_data.get('bio') == 'description', \
             'Проверьте, что при PATCH запросе `/api/v1/users/me/` изменяете данные'
         client_user = auth_client(moderator)
-        response = client_user.patch(f'/api/v1/users/me/', data={'first_name': 'NewTest'})
-        test_moderator = get_user_model().objects.get(username=moderator.username)
+        response = client_user.patch(f'/api/v1/users/me/',
+                                     data={'first_name': 'NewTest'})
+        test_moderator = get_user_model().objects.get(
+            username=moderator.username)
         assert response.status_code == 200, \
             'Проверьте, что при PATCH запросе `/api/v1/users/me/` с токеном авторизации возвращается статус 200'
         assert test_moderator.first_name == 'NewTest', \
