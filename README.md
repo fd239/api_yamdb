@@ -52,4 +52,4 @@ It's learning project so test are aimed at checking the fulfillment of a test ta
 ## Authors
 
 * **Yandex Praktikum** - *Test task and tests cover* - [yandex-praktikum](https://github.com/yandex-praktikum)
-* **Dmitriy Frolov** - *Connection and interaction with Yandex API and Telegram API* - [fd239](https://github.com/fd239)
+* **Dmitriy Frolov** - *API for all models, user registration, etc.* - [fd239](https://github.com/fd239)
